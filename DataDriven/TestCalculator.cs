@@ -1,6 +1,8 @@
-using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
+using NUnit.Framework;
+using System;
 
 namespace DataDriven
 {
@@ -19,18 +21,15 @@ namespace DataDriven
         public void SetUp()
         {
             ChromeOptions options = new ChromeOptions();
-            // Ensure Chrome runs in headless mode
-            options.AddArguments("headless");
-            // Bypass OS security model, required for running in Docker
-            options.AddArguments("no-sandbox");
-            // Overcome limited resource problems
-            options.AddArguments("disable-dev-shm-usage");
-            // Applicable to Windows OS only
-            options.AddArguments("disable-gpu");
-            // Set window size to ensure elements are visible
-            options.AddArguments("window-size=1920x1080"); 
+            options.AddArguments("headless"); // Ensure Chrome runs in headless mode
+            options.AddArguments("no-sandbox"); // Bypass OS security model, required for running in Docker
+            options.AddArguments("disable-dev-shm-usage"); // Overcome limited resource problems
+            options.AddArguments("disable-gpu"); // Applicable to Windows OS only
+            options.AddArguments("window-size=1920x1080"); // Set window size to ensure elements are visible
+            options.AddArguments("disable-extensions"); // Disable extensions
+            options.AddArguments("remote-debugging-port=9222"); // Remote debugging port
 
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Url = "http://softuni-qa-loadbalancer-2137572849.eu-north-1.elb.amazonaws.com/number-calculator/";
 
@@ -48,7 +47,7 @@ namespace DataDriven
             driver.Quit();
         }
 
-        public void PerformCalculation(string firstNumber, string operation, 
+        public void PerformCalculation(string firstNumber, string operation,
                                         string secondNumber, string expectedResult)
         {
             // Click the [Reset] button
@@ -83,7 +82,7 @@ namespace DataDriven
         [TestCase("2e2", "* (multiply)", "1.5", "Result: 300")]
         [TestCase("5", "/ (divide)", "0", "Result: Infinity")]
         [TestCase("invalid", "+ (sum)", "10", "Result: invalid input")]
-        public void TestNumberCalculator(string firstNumber, string operation, 
+        public void TestNumberCalculator(string firstNumber, string operation,
                                             string secondNumber, string expectedResult)
         {
             PerformCalculation(firstNumber, operation, secondNumber, expectedResult);
