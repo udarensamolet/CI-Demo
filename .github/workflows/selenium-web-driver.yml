@@ -22,19 +22,19 @@ jobs:
         dotnet-version: '6.0.x'
 
     - name: Install dependencies
-      run: dotnet restore 
+      run: dotnet restore SeleniumBasicExercise.sln
 
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build SeleniumBasicExercise.sln --no-restore
 
     - name: Run DataDriven tests
-      run: dotnet test DataDriven/TestCalculator.csproj --verbosity normal
+      run: dotnet test DataDriven/DataDriven.csproj --verbosity normal
 
     - name: Run HTMLElement01 tests
-      run: dotnet test HTMLElement01/FillForm.csproj --verbosity normal
+      run: dotnet test HTML_Elements_01/HTML_Elements_01.csproj --verbosity normal
 
     - name: Run HTMLElement02 tests
-      run: dotnet test HTMLElement02/Table.csproj --verbosity normal
+      run: dotnet test HTML_Elements_02/HTML_Elements_02.csproj --verbosity normal
     
     - name: Run HTMLElement03 tests
-      run: dotnet test HTMLElement03/DropDown.csproj --verbosity normal
+      run: dotnet test HTMLElements03/HTMLElements03.csproj --verbosity normal
