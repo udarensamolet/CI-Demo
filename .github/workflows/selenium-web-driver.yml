@@ -1,0 +1,40 @@
+name: .NET Core CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v2
+      with:
+        dotnet-version: '6.0.x'
+
+    - name: Install dependencies
+      run: dotnet restore
+
+    - name: Build
+      run: dotnet build --no-restore
+
+    - name: Run DataDriven tests
+      run: dotnet test DataDriven/TestCalculator.csproj --no-build --verbosity normal
+
+    - name: Run HTMLElement01 tests
+      run: dotnet test HTMLElement01/FillForm.csproj --no-build --verbosity normal
+
+    - name: Run HTMLElement02 tests
+      run: dotnet test HTMLElement02/Table.csproj --no-build --verbosity normal
+    
+    - name: Run HTMLElement03 tests
+      run: dotnet test HTMLElement03/DropDown.csproj --no-build --verbosity normal
