@@ -21,6 +21,11 @@ jobs:
       with:
         dotnet-version: '6.0.x'
 
+    - name: Install Chrome
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+
     - name: Install dependencies
       run: dotnet restore SeleniumBasicExercise.sln
 
@@ -28,13 +33,21 @@ jobs:
       run: dotnet build SeleniumBasicExercise.sln --no-restore
 
     - name: Run DataDriven tests
+      env:
+        CHROMEWEBDRIVER: /usr/bin/google-chrome
       run: dotnet test DataDriven/DataDriven.csproj --verbosity normal
 
     - name: Run HTMLElement01 tests
+      env:
+        CHROMEWEBDRIVER: /usr/bin/google-chrome
       run: dotnet test HTML_Elements_01/HTML_Elements_01.csproj --verbosity normal
 
     - name: Run HTMLElement02 tests
+      env:
+        CHROMEWEBDRIVER: /usr/bin/google-chrome
       run: dotnet test HTML_Elements_02/HTML_Elements_02.csproj --verbosity normal
     
     - name: Run HTMLElement03 tests
+      env:
+        CHROMEWEBDRIVER: /usr/bin/google-chrome
       run: dotnet test HTMLElements03/HTMLElements03.csproj --verbosity normal
