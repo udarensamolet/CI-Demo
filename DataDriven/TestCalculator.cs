@@ -18,6 +18,18 @@ namespace DataDriven
         [OneTimeSetUp]
         public void SetUp()
         {
+            ChromeOptions options = new ChromeOptions();
+            // Ensure Chrome runs in headless mode
+            options.AddArguments("headless");
+            // Bypass OS security model, required for running in Docker
+            options.AddArguments("no-sandbox");
+            // Overcome limited resource problems
+            options.AddArguments("disable-dev-shm-usage");
+            // Applicable to Windows OS only
+            options.AddArguments("disable-gpu");
+            // Set window size to ensure elements are visible
+            options.AddArguments("window-size=1920x1080"); 
+
             driver = new ChromeDriver();
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
             driver.Url = "http://softuni-qa-loadbalancer-2137572849.eu-north-1.elb.amazonaws.com/number-calculator/";
