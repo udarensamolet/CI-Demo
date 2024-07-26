@@ -39,21 +39,12 @@ jobs:
         echo "Running TestProject1 tests"
         dotnet test TestProject1/TestProject1.csproj --verbosity normal
 
-<<<<<<< HEAD
     - name: Run TestProject2 tests
       env:
         CHROMEWEBDRIVER: /usr/bin/google-chrome
       run: |
         echo "Running TestProject2 tests"
         dotnet test TestProject2/TestProject2.csproj --verbosity normal
-=======
-   # - name: Run HTMLElement01 tests
-   #   env:
-   #     CHROMEWEBDRIVER: /usr/bin/google-chrome
-   #   run: |
-   #     echo "Running HTMLElement01 tests"
-   #     dotnet test HTML_Elements_01/HTMLElements01.csproj --verbosity normal
->>>>>>> 586e1cc4d8f01674788ba922a7659681d555bd66
 
     - name: Run TestProject3 tests
       env:
