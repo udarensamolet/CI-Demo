@@ -32,7 +32,7 @@ namespace HTMLElements03
             options.AddArguments("remote-debugging-port=9222");
 
             // Create object of ChromeDriver
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
 
             // Add implicit wait
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);

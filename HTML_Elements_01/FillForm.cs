@@ -27,7 +27,7 @@ namespace HTMLElements01
             // Remote debugging port
             options.AddArguments("remote-debugging-port=9222");
 
-            driver = new ChromeDriver();
+            driver = new ChromeDriver(options);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(10);
 
             driver.Navigate().GoToUrl("http://practice.bpbonline.com/");
