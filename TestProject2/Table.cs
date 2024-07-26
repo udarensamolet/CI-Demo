@@ -3,7 +3,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace HTML_Elements_02
+namespace TestProject2
 {
     [TestFixture]
     public class WorkingWithWebTable

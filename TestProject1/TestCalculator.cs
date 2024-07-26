@@ -4,7 +4,7 @@ using OpenQA.Selenium.Support.UI;
 using NUnit.Framework;
 using System;
 
-namespace DataDriven
+namespace TestProject1
 {
     [TestFixture]
     public class TestCalculator
