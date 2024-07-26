@@ -14,27 +14,27 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up .NET Core
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '6.0.x'
 
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore 
 
     - name: Build
       run: dotnet build --no-restore
 
     - name: Run DataDriven tests
-      run: dotnet test DataDriven/TestCalculator.csproj --no-build --verbosity normal
+      run: dotnet test DataDriven/TestCalculator.csproj --verbosity normal
 
     - name: Run HTMLElement01 tests
-      run: dotnet test HTMLElement01/FillForm.csproj --no-build --verbosity normal
+      run: dotnet test HTMLElement01/FillForm.csproj --verbosity normal
 
     - name: Run HTMLElement02 tests
-      run: dotnet test HTMLElement02/Table.csproj --no-build --verbosity normal
+      run: dotnet test HTMLElement02/Table.csproj --verbosity normal
     
     - name: Run HTMLElement03 tests
-      run: dotnet test HTMLElement03/DropDown.csproj --no-build --verbosity normal
+      run: dotnet test HTMLElement03/DropDown.csproj --verbosity normal
