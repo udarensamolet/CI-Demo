@@ -25,15 +25,15 @@ pipeline {
             }
         }
 
-        stage('Install Chrome') {
+         stage('Uninstall Current Chrome') {
             steps {
                 bat '''
-                echo Installing Google Chrome version %CHROME_VERSION%
-                choco install googlechrome --version=%CHROME_VERSION% -y --allow-downgrade --ignore-checksums
+                echo Uninstalling current Google Chrome
+                choco uninstall googlechrome -y
                 '''
             }
         }
-
+        
         stage('Download and Install ChromeDriver') {
             steps {
                 bat '''
@@ -45,12 +45,13 @@ pipeline {
             }
         }
 
-        stage('Restore dependencies') {
+         stage('Restore dependencies') {
             steps {
                 // Restore dependencies using the solution file
                 bat 'dotnet restore SeleniumBasicExercise.sln'
             }
         }
+
 
         stage('Build') {
             steps {
