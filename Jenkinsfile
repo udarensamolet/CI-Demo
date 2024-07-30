@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         CHROME_VERSION = '127.0.6533.73'
+        CHROMEDRIVER_VERSION = '127.0.6533.72'
         CHROME_INSTALL_PATH = 'C:\\Program Files\\Google\\Chrome\\Application'
         CHROMEDRIVER_PATH = '"C:\\Program Files\\Google\\Chrome\\Application\\chromedriver.exe"'
     }
@@ -11,7 +12,7 @@ pipeline {
         stage('Checkout code') {
             steps {
                 // Checkout code from GitHub and specify the branch
-                git branch: 'main', url: 'https://github.com/udarensamolet/CI-Demo.git'
+                git branch: 'main', url: 'https://github.com/udarensamolet/SeleniumIDE.git'
             }
         }
 
@@ -36,9 +37,6 @@ pipeline {
         stage('Download and Install ChromeDriver') {
             steps {
                 bat '''
-                echo Finding the latest ChromeDriver version compatible with Chrome
-                powershell -command "(Invoke-WebRequest -Uri https://chromedriver.storage.googleapis.com/LATEST_RELEASE_127).Content" > latest_version.txt
-                set /p CHROMEDRIVER_VERSION=<latest_version.txt
                 echo Downloading ChromeDriver version %CHROMEDRIVER_VERSION%
                 powershell -command "Invoke-WebRequest -Uri https://chromedriver.storage.googleapis.com/%CHROMEDRIVER_VERSION%/chromedriver_win32.zip -OutFile chromedriver.zip -UseBasicParsing"
                 powershell -command "Expand-Archive -Path chromedriver.zip -DestinationPath ."
